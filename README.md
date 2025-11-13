@@ -11,28 +11,45 @@ Allows GULP to use ML potentials (PET-MAD, FairChem UMA) via a client-server arc
 
 ## Installation
 
+### Option 1: From GitHub URL (quick install)
+
 ```bash
-# Basic install
-uv pip install -e .
+uv venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-# With PET-MAD backend (for organic molecules)
-uv pip install -e ".[petmad]"
+# Install with PET-MAD backend
+uv pip install "gulp-mlips[petmad] @ git+https://github.com/peterspackman/gulp_mlips.git"
 
-# With FairChem backend (for materials)
-uv pip install -e ".[fairchem]"
-huggingface-cli login  # Required for FairChem
+# Or install with FairChem backend
+uv pip install "gulp-mlips[fairchem] @ git+https://github.com/peterspackman/gulp_mlips.git"
 ```
 
-## Quick Start
+### Option 2: Clone repository (recommended for examples)
 
 ```bash
-# 1. Start server (PET-MAD example)
-gulp-mlips-host --backend petmad --device cpu --port 8193 &
+git clone https://github.com/peterspackman/gulp_mlips.git
+cd gulp_mlips
 
-# 2. Test client
-gulp-mlips-client structure.xyz output.drv --port 8193
+uv venv
+source .venv/bin/activate
 
-# 3. Use with GULP - see examples below
+# Install with backend
+uv pip install -e ".[petmad]"
+uv pip install -e ".[fairchem]"
+```
+
+## Running Examples
+
+Each example includes a `run.sh` script that automatically starts the server and runs GULP:
+
+```bash
+# Benzene with PET-MAD
+cd examples/gulp/benzene
+./run.sh
+
+# Si diamond with FairChem UMA
+cd examples/gulp/uma
+./run.sh
 ```
 
 ## Examples
@@ -44,13 +61,6 @@ Complete working examples with GULP:
 - **[examples/gulp/si_diamond](examples/gulp/si_diamond)** - Simple test system
 - **[examples/gulp/gfnff](examples/gulp/gfnff)** - .drv format validation test
 
-Each example has a `run.sh` script that handles everything automatically:
-
-```bash
-cd examples/gulp/benzene
-./run.sh
-```
-
 ## Available Backends
 
 ### PET-MAD
@@ -61,7 +71,9 @@ gulp-mlips-host --backend petmad --device cpu
 ```
 
 ### FairChem UMA
-Universal model for materials and molecules.
+Universal model for materials and molecules. Requires HuggingFace authentication (`huggingface-cli login`).
+
+See [FairChem documentation](https://fair-chem.github.io/core/install.html) for details.
 
 ```bash
 # For materials/crystals
