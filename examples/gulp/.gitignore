@@ -1,0 +1,50 @@
+# GULP output files
+*.gout
+*.got
+*.grs
+*.dens
+*.drv
+*.trj
+*.his
+
+# Structure output files
+*.xyz
+*.cif
+*.res
+*.arc
+*.pdb
+
+# Temporary files written by GULP for external calculator
+gulpext.xyz
+gulpext.cif
+gulpext.cssr
+gulp_mlip.drv
+
+# Server logs
+host.log
+*.log
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Backup files
+*~
+*.bak
+*.backup
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*#
+
+# Other generated files
+*.out
+*.err

@@ -1,0 +1,41 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Project-specific
+*.drv
+*.gout
+*.res
+output*.xyz
+output*.cif
+output*.cssr
+
+# Reference files (not tracked in repo)
+ref-files/
+
+# Don't track custom backends in examples
+examples/my_*.py
+examples/custom_*.py
+!examples/custom_backend_template.py

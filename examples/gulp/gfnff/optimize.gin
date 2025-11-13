@@ -1,0 +1,80 @@
+opti conp nosym full
+
+# Benzene crystal optimization using GULP's GFN-FF via external calculator
+# This tests the round-trip .drv format:
+# 1. Outer GULP (this) calls external calculator for forces
+# 2. gulp-mlips-host with GULP backend runs inner GULP with gfnff keyword
+# 3. Inner GULP writes .drv file with GFN-FF forces
+# 4. gulp_drv_calculator reads .drv file
+# 5. Forces are sent back to outer GULP for optimization
+
+title
+Benzene crystal - GFN-FF via gulp-mlips backend
+end
+
+cell
+  7.440000  9.550000  6.920000  90.0  90.0  90.0
+
+fractional
+C core  0.000000  0.125000  0.250000
+C core  0.000000  0.375000  0.250000
+C core  0.500000  0.625000  0.250000
+C core  0.500000  0.875000  0.250000
+C core  0.500000  0.125000  0.750000
+C core  0.500000  0.375000  0.750000
+C core  0.000000  0.625000  0.750000
+C core  0.000000  0.875000  0.750000
+C core  0.150000  0.062500  0.350000
+C core  0.150000  0.187500  0.150000
+C core  0.150000  0.312500  0.350000
+C core  0.150000  0.437500  0.150000
+C core  0.350000  0.562500  0.350000
+C core  0.350000  0.687500  0.150000
+C core  0.350000  0.812500  0.350000
+C core  0.350000  0.937500  0.150000
+C core  0.650000  0.062500  0.650000
+C core  0.650000  0.187500  0.850000
+C core  0.650000  0.312500  0.650000
+C core  0.650000  0.437500  0.850000
+C core  0.850000  0.562500  0.650000
+C core  0.850000  0.687500  0.850000
+C core  0.850000  0.812500  0.650000
+C core  0.850000  0.937500  0.850000
+H core  0.250000  0.031250  0.450000
+H core  0.250000  0.218750  0.050000
+H core  0.250000  0.281250  0.450000
+H core  0.250000  0.468750  0.050000
+H core  0.250000  0.531250  0.450000
+H core  0.250000  0.718750  0.050000
+H core  0.250000  0.781250  0.450000
+H core  0.250000  0.968750  0.050000
+H core  0.450000  0.031250  0.550000
+H core  0.450000  0.218750  0.950000
+H core  0.450000  0.281250  0.550000
+H core  0.450000  0.468750  0.950000
+H core  0.450000  0.531250  0.550000
+H core  0.450000  0.718750  0.950000
+H core  0.450000  0.781250  0.550000
+H core  0.450000  0.968750  0.950000
+H core  0.550000  0.031250  0.550000
+H core  0.550000  0.218750  0.950000
+H core  0.550000  0.281250  0.550000
+H core  0.550000  0.468750  0.950000
+H core  0.750000  0.531250  0.550000
+H core  0.750000  0.718750  0.950000
+H core  0.750000  0.781250  0.550000
+H core  0.750000  0.968750  0.950000
+
+# External calculator - calls gulp-mlips which runs GULP with GFN-FF
+external_call
+./gulp_mlips_wrapper.sh
+end
+external_drv gulp_mlip.drv
+
+# Optimization settings
+maxcyc 50
+gmax 0.01
+
+# Output
+output xyz benzene.xyz
+dump every benzene_optimization.drv

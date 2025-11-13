@@ -1,0 +1,24 @@
+opti conv nosym full conj unfix
+
+# Simple Al2O3 test structure
+cell
+  5.0 5.0 5.0 90.0 90.0 90.0
+
+fractional
+Al core  0.0 0.0 0.0
+Al core  0.5 0.5 0.0
+O  core  0.25 0.25 0.25
+O  core  0.75 0.75 0.25
+O  core  0.5 0.0 0.5
+
+# External MLIP calculator
+external_call
+./gulp_mlips_wrapper.sh
+end
+external_drv gulp_mlip.drv
+
+gtol 0.01
+
+# Output
+output xyz al2o3.xyz
+dump every al2o3.drv

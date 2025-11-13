@@ -1,0 +1,36 @@
+opti conp nosym full
+
+# Diamond silicon with wrong lattice parameter
+# Correct Si lattice parameter is ~5.43 Angstrom
+# Starting compressed at 5.0 Angstrom to test cell optimization
+
+title
+Silicon diamond structure - cell optimization test
+end
+
+cell
+  5.0 5.0 5.0 90.0 90.0 90.0
+
+fractional
+Si core  0.0    0.0    0.0
+Si core  0.25   0.25   0.25
+Si core  0.5    0.5    0.0
+Si core  0.5    0.0    0.5
+Si core  0.0    0.5    0.5
+Si core  0.75   0.75   0.25
+Si core  0.75   0.25   0.75
+Si core  0.25   0.75   0.75
+
+# External MLIP calculator
+external_call
+./gulp_mlips_wrapper.sh
+end
+external_drv gulp_mlip.drv
+
+# Optimization settings
+maxcyc 100
+gmax 0.01
+
+# Output
+output xyz si_optimized.xyz
+dump every si_optimization.drv
